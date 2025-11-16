@@ -20,6 +20,9 @@ rad.json
 #Test results file
 TestResults.xml
 
+.env.local
+.next
+
 node_modules
 src/app/components/GitHubStatsAnalyzer.tsx
 src/app/analyzer
