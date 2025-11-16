@@ -1,0 +1,372 @@
+.discordCard {
+  background: #161e2f;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.discordLogo {
+  display: flex;
+  align-items: center;
+}
+
+.cardTitle {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.avatarContainer {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.statusIndicator {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 3px solid rgba(54, 57, 63, 1);
+}
+
+.userDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.username {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.discriminator {
+  color: #b9bbbe;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.status {
+  color: #b9bbbe;
+  font-size: 11px;
+  text-transform: capitalize;
+}
+
+.activity {
+  background: rgba(75, 75, 75, 0.6);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.activityHeader {
+  color: #b9bbbe;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.activityName {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.activityDetails {
+  color: #b9bbbe;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.activityState {
+  color: #b9bbbe;
+  font-size: 12px;
+}
+
+.spotify {
+  background: rgba(29, 185, 84, 0.1);
+  border: 1px solid rgba(29, 185, 84, 0.3);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.spotifyHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #1db954;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.spotifyTrack {
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spotifyArtist {
+  color: #b9bbbe;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.offlineInfo {
+  color: #a0a7b2;
+  font-size: 11px;
+  text-align: center;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.loadingState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+  color: #b9bbbe;
+  font-size: 12px;
+}
+
+.loadingSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(185, 187, 190, 0.3);
+  border-top: 2px solid #5865f2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #f23f43;
+  font-size: 12px;
+  text-align: center;
+}
+
+.badgesSection {
+  margin-bottom: 12px;
+}
+
+.badgesHeader {
+  color: #b9bbbe;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(32, 34, 37, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.badge:hover {
+  transform: scale(1.1);
+}
+
+.badge:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.badgeEmoji {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.badgeImage {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.nameplateBadge {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: linear-gradient(45deg, #5865f2, #7289da);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nameplateText {
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .discordCard {
+    padding: 12px;
+  }
+  
+  .userInfo {
+    gap: 10px;
+  }
+  
+  .avatarContainer {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .statusIndicator {
+    width: 14px;
+    height: 14px;
+    border-width: 2px;
+  }
+  
+  .username {
+    font-size: 13px;
+  }
+}/* Error 
+State Styles */
+.errorState {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.2);
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+.errorIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.errorText {
+  flex: 1;
+}
+
+.errorTitle {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.errorMessage {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+/* Loading State Improvements */
+.loadingState {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  justify-content: center;
+}
+
+.loadingSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top: 2px solid #5865f2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadingState span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+}

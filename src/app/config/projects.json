@@ -1,0 +1,56 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "KYV3D Calculator",
+      "description": "Calculadora 3D interativa desenvolvida com tecnologias modernas. Interface intuitiva e funcionalidades avançadas de cálculo.",
+      "image": ["/assets/projects/kyv3d-calculator-01.png", "/assets/projects/kyv3d-calculator-02.png"],
+      "className": "projectCard--calculator",
+      "detailsLink": "https://github.com/nevesfg/kyv3d-calculator",
+      "viewLink": "https://kyv3d-calculator.vercel.app",
+      "technologies": ["HTML5", "CSS3", "Next.js", "TypeScript"],
+      "isPublic": false,
+      "date": "15/03/28",
+      "aboutProject": "A KYV3D Calculator é uma calculadora 3D interativa que combina funcionalidade matemática avançada com uma interface visual impressionante. O projeto foi desenvolvido utilizando tecnologias web modernas para criar uma experiência única de cálculo.\n\nO design 3D foi implementado com CSS3 e JavaScript puro, criando animações fluidas e transições suaves que tornam a interação com a calculadora mais envolvente. A interface responde a diferentes tipos de entrada, incluindo cliques do mouse e teclas do teclado.\n\nAs funcionalidades incluem operações básicas (adição, subtração, multiplicação, divisão), operações avançadas (potenciação, raiz quadrada, porcentagem) e um histórico de cálculos. O projeto também implementa validação de entrada e tratamento de erros para garantir uma experiência robusta.\n\nA aplicação é totalmente responsiva, adaptando-se perfeitamente a diferentes tamanhos de tela, desde desktops até dispositivos móveis. O deploy foi realizado na Vercel, garantindo alta performance e disponibilidade global."
+    },
+    {
+      "id": 2,
+      "title": "Portfolio Website",
+      "description": "Site pessoal responsivo com design moderno e animações suaves. Desenvolvido com Next.js e Tailwind CSS.",
+      "image": ["/assets/projects/portfolio-01.png", "/assets/projects/portfolio-02.png"],
+      "className": "projectCard--portfolio",
+      "detailsLink": "https://github.com/nevesfg/portfolio",
+      "viewLink": "https://victorneves.dev",
+      "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      "isPublic": true,
+      "date": "22/02/24",
+      "aboutProject": "Este portfolio representa a evolução do meu desenvolvimento como programador, construído com as mais modernas tecnologias do ecossistema React. O projeto utiliza Next.js 14 com App Router, aproveitando recursos como Server Components e otimizações automáticas de performance.\n\nO design foi cuidadosamente planejado para refletir profissionalismo e criatividade, utilizando Tailwind CSS para criar um sistema de design consistente e responsivo. As animações foram implementadas com Framer Motion, proporcionando transições suaves e interações envolventes.\n\nA arquitetura do projeto segue as melhores práticas de desenvolvimento, com componentes reutilizáveis, tipagem forte com TypeScript e otimizações de SEO. O site inclui seções para projetos, habilidades, experiência e um sistema de contato funcional.\n\nO deploy é realizado automaticamente via Vercel, com integração contínua que garante que todas as atualizações sejam testadas e implementadas de forma segura. O site também implementa métricas de performance e analytics para monitoramento contínuo."
+    },
+    {
+      "id": 3,
+      "title": "E-commerce App",
+      "description": "Aplicativo de e-commerce completo com carrinho de compras, pagamentos e sistema de avaliações.",
+      "image": ["/assets/projects/ecommerce-01.png", "/assets/projects/ecommerce-02.png"],
+      "className": "projectCard--ecommerce",
+      "detailsLink": "https://github.com/nevesfg/ecommerce-app",
+      "viewLink": "https://ecommerce-demo.vercel.app",
+      "technologies": ["React", "Node.js", "MongoDB", "JavaScript"],
+      "isPublic": false,
+      "date": "08/01/24",
+      "aboutProject": "Este projeto de e-commerce representa um sistema completo de vendas online, desenvolvido com foco na experiência do usuário e na robustez do backend. A aplicação foi construída utilizando React no frontend e Node.js com Express no backend, garantindo uma arquitetura escalável e performática.\n\nO sistema inclui funcionalidades essenciais como catálogo de produtos com filtros avançados, carrinho de compras persistente, sistema de autenticação seguro, processamento de pagamentos integrado com Stripe, e um painel administrativo completo para gerenciamento de produtos, pedidos e usuários.\n\nO banco de dados MongoDB foi escolhido pela flexibilidade no armazenamento de dados de produtos variados, com schemas otimizados para consultas rápidas. A aplicação implementa também um sistema de avaliações e comentários, notificações em tempo real e integração com APIs de frete.\n\nPor se tratar de um projeto com informações comerciais sensíveis, o código fonte permanece privado, mas uma versão demo está disponível para demonstração das funcionalidades principais."
+    },
+    {
+      "id": 4,
+      "title": "Task Manager",
+      "description": "Gerenciador de tarefas com interface drag-and-drop, notificações e sincronização em tempo real.",
+      "image": ["/assets/projects/taskmanager-01.png", "/assets/projects/taskmanager-02.png"],
+      "className": "projectCard--taskmanager",
+      "detailsLink": "https://github.com/nevesfg/task-manager",
+      "viewLink": "https://taskmanager-demo.vercel.app",
+      "technologies": ["React", "TypeScript", "Node.js", "MongoDB", "Git"],
+      "isPublic": true,
+      "date": "12/12/23",
+      "aboutProject": "O Task Manager é uma aplicação de produtividade desenvolvida para otimizar o gerenciamento de tarefas e projetos. Construído com React e TypeScript no frontend, oferece uma interface intuitiva e altamente interativa, com funcionalidades de drag-and-drop implementadas com React Beautiful DnD.\n\nO backend utiliza Node.js com Express e TypeScript, garantindo type safety em toda a aplicação. O sistema de autenticação é baseado em JWT, com refresh tokens para maior segurança. A sincronização em tempo real é implementada com Socket.io, permitindo que equipes colaborem simultaneamente.\n\nAs funcionalidades incluem criação de projetos e tarefas, atribuição de responsáveis, definição de prazos, sistema de prioridades, comentários em tarefas, anexos de arquivos e relatórios de produtividade. O sistema também envia notificações por email para prazos próximos do vencimento.\n\nA aplicação é totalmente responsiva e inclui um modo escuro/claro. O banco de dados MongoDB armazena todas as informações com schemas otimizados para consultas complexas de relatórios. O projeto utiliza Git para versionamento e implementa CI/CD com testes automatizados."
+    }
+  ]
+}
