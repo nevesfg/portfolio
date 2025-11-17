@@ -20,12 +20,17 @@ interface Project {
 
 export default function AllProjects() {
     const [projects, setProjects] = useState<Project[]>([]);
+    const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
     const [imageStates, setImageStates] = useState<{[key: number]: boolean}>({});
+    const [selectedTech, setSelectedTech] = useState<string>('all');
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [allTechnologies, setAllTechnologies] = useState<string[]>([]);
 
     useEffect(() => {
         setTimeout(() => {
             setProjects(projectsData.projects);
+            setFilteredProjects(projectsData.projects);
             setLoading(false);
             
             const initialImageStates: {[key: number]: boolean} = {};
@@ -33,6 +38,13 @@ export default function AllProjects() {
                 initialImageStates[project.id] = false;
             });
             setImageStates(initialImageStates);
+
+            // Extrair todas as tecnologias únicas
+            const techSet = new Set<string>();
+            projectsData.projects.forEach(project => {
+                project.technologies.forEach(tech => techSet.add(tech));
+            });
+            setAllTechnologies(Array.from(techSet).sort());
         }, 500);
     }, []);
 
@@ -50,7 +62,30 @@ export default function AllProjects() {
         return () => clearInterval(interval);
     }, [projects]);
 
+    useEffect(() => {
+        let filtered = projects;
 
+        // Filtrar por tecnologia
+        if (selectedTech !== 'all') {
+            filtered = filtered.filter(project => 
+                project.technologies.includes(selectedTech)
+            );
+        }
+
+        // Filtrar por pesquisa
+        if (searchQuery.trim()) {
+            filtered = filtered.filter(project =>
+                project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                project.description.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        }
+
+        setFilteredProjects(filtered);
+    }, [selectedTech, searchQuery, projects]);
+
+    const handleTechFilter = (tech: string) => {
+        setSelectedTech(tech);
+    };
 
     const handleProjectClick = (project: Project) => {
         window.location.href = `/projects/${project.id}`;
@@ -84,13 +119,92 @@ export default function AllProjects() {
                     <div className="projectsHeader">
                         <div className="projectsCount">
                             <span className="projectsCountLabel">
-                                {projects.length} projetos encontrados
+                                {filteredProjects.length} projeto{filteredProjects.length !== 1 ? 's' : ''} encontrado{filteredProjects.length !== 1 ? 's' : ''}
                             </span>
                         </div>
                     </div>
 
-                    <div className="projectsGrid">
-                        {projects.map((project) => (
+                    {/* Barra de filtros */}
+                    <div className="projectsFilters">
+                        <div className="techFilters">
+                            <button
+                                className={`techFilterBtn ${selectedTech === 'all' ? 'active' : ''}`}
+                                onClick={() => handleTechFilter('all')}
+                            >
+                                Todos
+                            </button>
+                            {allTechnologies.map((tech) => {
+                                const techIcon = technologyIcons.technologies[tech as keyof typeof technologyIcons.technologies];
+                                return (
+                                    <button
+                                        key={tech}
+                                        className={`techFilterBtn ${selectedTech === tech ? 'active' : ''}`}
+                                        onClick={() => handleTechFilter(tech)}
+                                        title={tech}
+                                    >
+                                        {techIcon && (
+                                            <span 
+                                                className="techFilterIcon"
+                                                dangerouslySetInnerHTML={{ __html: techIcon.icon }}
+                                            />
+                                        )}
+                                        <span className="techFilterText">{tech}</span>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                        <div className="searchFilter">
+                            <svg 
+                                className="searchIcon" 
+                                aria-hidden="true" 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="18" 
+                                height="18" 
+                                fill="none" 
+                                viewBox="0 0 24 24"
+                            >
+                                <path 
+                                    stroke="currentColor" 
+                                    strokeLinecap="round" 
+                                    strokeWidth="2" 
+                                    d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+                                />
+                            </svg>
+                            <input
+                                type="text"
+                                placeholder="Pesquisar projetos..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="searchInput"
+                            />
+                            {searchQuery && (
+                                <button
+                                    className="clearSearchBtn"
+                                    onClick={() => setSearchQuery('')}
+                                    title="Limpar pesquisa"
+                                >
+                                    ✕
+                                </button>
+                            )}
+                        </div>
+                    </div>
+
+                    {filteredProjects.length === 0 ? (
+                        <div className="noProjectsFound">
+                            <p>Nenhum projeto encontrado com os filtros selecionados.</p>
+                            <button 
+                                className="resetFiltersBtn"
+                                onClick={() => {
+                                    setSelectedTech('all');
+                                    setSearchQuery('');
+                                }}
+                            >
+                                Limpar filtros
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="projectsGrid">
+                            {filteredProjects.map((project) => (
                             <div key={project.id} className="project-card">
                                 <div 
                                     className="project-card-image"
@@ -115,7 +229,7 @@ export default function AllProjects() {
                                 </p>
                                 
                                 <div className="project-card-technologies">
-                                    {project.technologies.slice(0, 4).map((tech, index) => {
+                                    {project.technologies.slice(0, 8).map((tech, index) => {
                                         const techIcon = technologyIcons.technologies[tech as keyof typeof technologyIcons.technologies];
                                         return techIcon ? (
                                             <div 
@@ -162,8 +276,9 @@ export default function AllProjects() {
                                     Desenvolvido por <span className="by-name">Victor Neves</span> em <span className="date">{project.date}</span>
                                 </p>
                             </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
 
                     <div className="allProjectsFooter">
                         <button 

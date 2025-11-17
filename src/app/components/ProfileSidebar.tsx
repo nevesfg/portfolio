@@ -16,18 +16,33 @@ export default function ProfileSidebar() {
         const formData = new FormData(form);
 
         try {
-            const response = await fetch('https://formsubmit.co/victor@nevesfg.com', {
+            // Enviar diretamente para FormSubmit com AJAX
+            const response = await fetch('https://formsubmit.co/ajax/victor@nevesfg.com', {
                 method: 'POST',
-                body: formData,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    message: formData.get('message'),
+                    _subject: 'Novo contato do portfólio!',
+                    _captcha: 'false',
+                    _template: 'table'
+                })
             });
 
-            if (response.ok) {
+            const result = await response.json();
+
+            if (response.ok && result.success) {
                 setSubmitStatus('success');
                 form.reset();
                 // Limpar status após 5 segundos
                 setTimeout(() => setSubmitStatus('idle'), 5000);
             } else {
                 setSubmitStatus('error');
+                console.error('Erro:', result.message || 'Erro ao enviar');
             }
         } catch (error) {
             console.error('Erro ao enviar formulário:', error);
@@ -53,11 +68,6 @@ export default function ProfileSidebar() {
                         onSubmit={handleSubmit}
                         className="contactForm"
                     >
-                        {/* FormSubmit Configuration */}
-                        <input type="hidden" name="_subject" value="Novo contato do portfólio!" />
-                        <input type="hidden" name="_captcha" value="false" />
-                        <input type="hidden" name="_template" value="table" />
-                        
                         <div className="formGroup">
                             <label htmlFor="name">Nome</label>
                             <input 

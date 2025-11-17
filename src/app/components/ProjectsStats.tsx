@@ -127,7 +127,7 @@ export default function ProjectsStats() {
                 <div className="gamecollectorShowcase">
                     <div className="showcaseContentBg">
                         <a className="showcaseStat" >
-                            <div className="value">12</div>
+                            <div className="value">15</div>
                             <div className="label">Projetos</div>
                         </a>
                         <a className="showcaseStat" >

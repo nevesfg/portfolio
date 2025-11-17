@@ -334,7 +334,7 @@ textarea:focus {
 }
 
 .profileHeaderBgTexture {
-    background: url("https://via.placeholder.com/100x100/1b2838/ffffff?text=texture") repeat;
+    /* background: url("https://via.placeholder.com/100x100/1b2838/ffffff?text=texture") repeat; */
     /* opacity: 0.05; */
 }
 
@@ -757,7 +757,7 @@ Responsivo para ProfileDescription
 
 .projectsGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
     gap: 24px;
     padding: 0 20px 20px;
 }
@@ -765,6 +765,7 @@ Responsivo para ProfileDescription
 .project-card {
     padding: 20px;
     width: 100%;
+    max-width: 450px;
     min-height: 420px;
     border-radius: 20px;
     /* background: linear-gradient(145deg, #f0f0f0, #e8e8e8); */
@@ -775,6 +776,7 @@ Responsivo para ProfileDescription
     flex-direction: column;
     position: relative;
     cursor: pointer;
+    justify-self: start;
 }
 
 .project-card:hover {
@@ -966,6 +968,222 @@ Responsivo para ProfileDescription
     background: linear-gradient(135deg, #4a9eff 0%, #2d7dd2 100%);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(103, 193, 245, 0.3);
+}
+
+/* Projects Filters */
+.projectsFilters {
+    display: flex;
+    gap: 16px;
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.techFilters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.techFilterBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    color: #b8bcbf;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.techFilterBtn:hover {
+    background: rgba(103, 193, 245, 0.1);
+    border-color: rgba(103, 193, 245, 0.3);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.techFilterBtn.active {
+    background: linear-gradient(135deg, rgba(103, 193, 245, 0.3) 0%, rgba(74, 158, 255, 0.2) 100%);
+    border-color: #67c1f5;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(103, 193, 245, 0.3);
+}
+
+.techFilterIcon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.techFilterIcon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.techFilterText {
+    font-family: inherit;
+}
+
+.searchFilter {
+    position: relative;
+    min-width: 250px;
+    display: flex;
+    align-items: center;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 14px;
+    color: rgba(198, 212, 223, 0.5);
+    pointer-events: none;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.searchFilter:focus-within .searchIcon {
+    color: #67c1f5;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 10px 36px 10px 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 12px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #67c1f5;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 2px rgba(103, 193, 245, 0.2);
+}
+
+.searchInput::placeholder {
+    color: rgba(198, 212, 223, 0.5);
+}
+
+.clearSearchBtn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b8bcbf;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clearSearchBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.noProjectsFound {
+    text-align: center;
+    padding: 60px 20px;
+    color: rgba(198, 212, 223, 0.7);
+}
+
+.noProjectsFound p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.resetFiltersBtn {
+    background: linear-gradient(135deg, #67c1f5 0%, #4a9eff 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.resetFiltersBtn:hover {
+    background: linear-gradient(135deg, #4a9eff 0%, #2d7dd2 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(103, 193, 245, 0.3);
+}
+
+/* Responsive Filters */
+@media (max-width: 768px) {
+    .projectsFilters {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 15px;
+    }
+    
+    .techFilters {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .techFilterBtn {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+    
+    .techFilterIcon {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .searchFilter {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .searchInput {
+        padding: 8px 32px 8px 36px;
+        font-size: 11px;
+    }
+    
+    .searchIcon {
+        left: 12px;
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .techFilterBtn .techFilterText {
+        display: none;
+    }
+    
+    .techFilterBtn {
+        padding: 6px 10px;
+    }
+    
+    .techFilterBtn:first-child .techFilterText {
+        display: inline;
+    }
 }
 
 /* Responsive */
@@ -3022,7 +3240,7 @@ New Project Card Styles */
 }
 
 .card__description {
-    margin: 10px 0;
+    margin-bottom: 5px;
     font-size: 12px;
     color: #777;
     line-height: 1.4;
