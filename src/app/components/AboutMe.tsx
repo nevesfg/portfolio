@@ -15,11 +15,13 @@ export default function AboutMe() {
                             <div className="aboutMeDetails">
                                 <div className="aboutMeTitle">Olá, bem-vindo ao meu portfólio!</div>
                                 <div className="aboutMeDescription">
-                                    Sou um Desenvolvedor Front-End, atualmente aguardando apenas a defesa do TCC para finalizar minha formação em Análise e Desenvolvimento de Sistemas pelo IF Baiano – Campus Guanambi. Minha jornada na tecnologia começou como hobby, evoluiu com mais de três anos de estudos acadêmicos e, desde então, tem se transformado em carreira e propósito. Ao longo desse caminho, desenvolvi uma compreensão sólida sobre como criar aplicações web eficientes, intuitivas e visualmente atraentes.
+                                    Sou um Desenvolvedor Front-End, concluinte do curso de Análise e Desenvolvimento de Sistemas pelo IF Baiano – Campus Guanambi.
+                                    <br/><br/>
+                                    Minha jornada na tecnologia começou como hobby, evoluiu com mais de três anos de estudos acadêmicos e, desde então, tem se transformado em carreira e propósito. Ao longo desse caminho, desenvolvi uma compreensão sólida sobre como criar aplicações web eficientes, intuitivas e visualmente atraentes.
                                 </div>
-                                <p>
-"Se você pode sonhar, você pode realizar." — Walt Disney
-                                </p>
+                                <blockquote className="github-quote">
+                                    "Se você pode sonhar, você pode realizar." — Walt Disney
+                                </blockquote>
                             </div>
                         </div>
                     </div>
@@ -32,7 +34,9 @@ export default function AboutMe() {
                             <div className="aboutMeDetails">
                                 <div className="aboutMeTitle">Tecnologias & Habilidades</div>
                                 <div className="aboutMeDescription">
-                                    Embora meu foco atual seja o Front-End, também construí uma base consistente no backend, o que me permite atuar com visão completa do produto. Trabalho com tecnologias como Node.js, Git, MySQL, Django Rest Framework e Java, enquanto no front-end utilizo React.js, Vue.js, Django, Spring Boot, Bootstrap, HTML5 e CSS3.
+                                    Embora meu foco atual seja o Front-End, também construí uma base consistente no backend, o que me permite atuar com visão completa do produto. 
+                                    <br/><br/>
+                                    {/* Trabalho com tecnologias como Node.js, Git, MySQL, Django Rest Framework e Java, enquanto no front-end utilizo React.js, Vue.js, Django, Spring Boot, Bootstrap, HTML5 e CSS3. */}
  Essa combinação me permite criar soluções modernas, escaláveis e alinhadas às demandas reais do mercado.
                                 </div>
                                 {/* <div className="aboutMeSkills">
@@ -56,11 +60,10 @@ export default function AboutMe() {
                             <div className="aboutMeDetails">
                                 <div className="aboutMeTitle">Paixão & Inovação</div>
                                 <div className="aboutMeDescription">
-                                    Além da área técnica, sou um entusiasta do universo dos games, algo que impulsiona minha criatividade, minha visão estética e até meu inglês — características que agregam valor ao meu processo de desenvolvimento e à forma como penso soluções.
+                                    Além da área técnica, sou um entusiasta do universo dos games, algo que impulsiona minha criatividade, minha visão estética e até meu inglês características que agregam valor ao meu processo de desenvolvimento e à forma como penso soluções.
                                 </div>
                                 <div className="aboutMeDescription">
                                     Sou movido por curiosidade, evolução contínua e pela vontade de transformar ideias em experiências reais.
- Estou sempre atento às tendências que moldam o futuro da tecnologia e aberto a novos desafios que ampliem minhas habilidades e meu impacto.
                                 </div>
                             </div>
                         </div>

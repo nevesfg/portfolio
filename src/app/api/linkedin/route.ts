@@ -6,7 +6,7 @@ export async function POST(req: Request) {
   const params = new URLSearchParams({
     grant_type: "authorization_code",
     code,
-    redirect_uri: process.env.LINKEDIN_REDIRECT_URI || "http://localhost:3000/auth/linkedin/callback",
+    redirect_uri: process.env.LINKEDIN_REDIRECT_URI || "https://nevesfg.com/auth/linkedin/callback",
     client_id: process.env.LINKEDIN_CLIENT_ID || "",
     client_secret: process.env.LINKEDIN_CLIENT_SECRET || "",
   });

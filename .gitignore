@@ -19,9 +19,15 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
-
+.env
 .env.local
 .next
+.dockerignore
+
+docker-compose.yml
+Dockerfile
+nginx-formsubmit.conf
+nginx-portfolio.conf
 
 node_modules
 src/app/components/GitHubStatsAnalyzer.tsx

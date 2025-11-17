@@ -6,20 +6,19 @@ O portfolio apresenta uma arquitetura robusta com componentes reutilizáveis, si
 
 Desenvolvido com foco em performance e experiência do usuário, o projeto utiliza as mais recentes tecnologias do ecossistema React, incluindo Server Components do Next.js, TypeScript para type safety, Tailwind CSS para estilização moderna, e integração com APIs externas. O sistema de moderação de comentários utiliza inteligência artificial para filtrar conteúdo inadequado automaticamente, enquanto o analisador de GitHub fornece insights detalhados sobre repositórios e contribuições.
 
-
 ## ✨ Funcionalidades Principais
 
-- **Design Steam-Inspired** com navegação lateral retrátil
-- **Filtros dinâmicos** de projetos por tecnologia e busca
-- **Sistema de comentários** com moderação por IA (OpenAI)
-- **Integração GitHub** para análise de repositórios
-- **Autenticação LinkedIn** OAuth
-- **Totalmente responsivo** com animações fluidas
+-   **Design Steam-Inspired** com navegação lateral retrátil
+-   **Filtros dinâmicos** de projetos por tecnologia e busca
+-   **Sistema de comentários** com moderação por IA (OpenAI)
+-   **Integração GitHub** para análise de repositórios
+-   **Autenticação LinkedIn** OAuth
+-   **Totalmente responsivo** com animações fluidas
 
 ## 🚀 Tecnologias
 
-- Next.js 16 | React 19 | TypeScript 5
-- Tailwind CSS 4 | OpenAI API | GitHub API
+-   Next.js 16 | React 19 | TypeScript 5
+-   Tailwind CSS 4 | OpenAI API | GitHub API
 
 ## 📦 Instalação
 
@@ -43,7 +42,8 @@ LINKEDIN_CLIENT_SECRET=seu_secret
 ## 👤 Autor
 
 **Victor Neves**
-- GitHub: [@nevesfg](https://github.com/nevesfg)
+
+-   GitHub: [@nevesfg](https://github.com/nevesfg)
 
 ## 📄 Licença
 
