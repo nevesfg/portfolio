@@ -30,6 +30,7 @@ export default function Comments() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [authMode, setAuthMode] = useState<'anonymous' | 'linkedin'>('anonymous');
     const [linkedInUser, setLinkedInUser] = useState<LinkedInUser | null>(null);
+    const [cooldownSeconds, setCooldownSeconds] = useState(0);
     const [alertConfig, setAlertConfig] = useState<{
         isOpen: boolean;
         title: string;
@@ -42,7 +43,6 @@ export default function Comments() {
     
     const COMMENTS_PER_PAGE = 6;
 
-    // Função para obter a data atual real do sistema
     const getCurrentDate = () => {
         return new Date();
     };
@@ -105,9 +105,19 @@ export default function Comments() {
     useEffect(() => {
         // Carregar comentários da API
         loadComments();
-        // Não gerar Pokémon automaticamente - apenas com LinkedIn - Descomentar pra voltar a gerar pokemons
-        //  generateNewPokemon();
+        // Gerar Pokémon para modo anônimo
+        generateNewPokemon();
     }, []);
+
+    // Contador de cooldown
+    useEffect(() => {
+        if (cooldownSeconds > 0) {
+            const timer = setTimeout(() => {
+                setCooldownSeconds(cooldownSeconds - 1);
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [cooldownSeconds]);
 
     const generateNewPokemon = () => {
         const randomPokemon = firstGenPokemons[Math.floor(Math.random() * firstGenPokemons.length)];
@@ -174,19 +184,55 @@ export default function Comments() {
         }, 1000);
     };
 
-    //Utiliza o modo anonimo/pokemon para comentar
-    // const handleAnonymousMode = () => {
-    //     setAuthMode('anonymous');
-    //     setLinkedInUser(null);
-    //     if (!currentUserPokemon) {
-    //         generateNewPokemon();
-    //     }
-    // };
+    // Utiliza o modo anonimo/pokemon para comentar
+    const handleAnonymousMode = () => {
+        setAuthMode('anonymous');
+        setLinkedInUser(null);
+        if (!currentUserPokemon) {
+            generateNewPokemon();
+        }
+    };
 
     const handleLogout = () => {
         setAuthMode('anonymous');
         setLinkedInUser(null);
         generateNewPokemon();
+    };
+
+    const handleDeleteComment = async (commentId: number) => {
+        if (!linkedInUser || linkedInUser.id !== 'l-Aqc5-pZh') {
+            showAlert('Não Autorizado', 'Você não tem permissão para deletar comentários.');
+            return;
+        }
+
+        if (!confirm('Tem certeza que deseja deletar este comentário?')) {
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/comments', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    commentId,
+                    linkedInId: linkedInUser.id
+                }),
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                setComments(prev => prev.filter(c => c.id !== commentId));
+                showAlert('Sucesso', 'Comentário deletado com sucesso!');
+            } else {
+                const data = await response.json();
+                showAlert('Erro', data.error || 'Erro ao deletar comentário');
+            }
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+            showAlert('Erro', 'Erro ao deletar comentário');
+        }
     };
 
     const loadComments = async () => {
@@ -196,7 +242,6 @@ export default function Comments() {
             setComments(data.comments);
         } catch (error) {
             console.error('Error loading comments:', error);
-            // Fallback para dados locais se a API falhar
             setComments(commentsData.comments);
         }
     };
@@ -204,18 +249,15 @@ export default function Comments() {
     const totalComments = comments.length;
     const totalPages = Math.ceil(totalComments / COMMENTS_PER_PAGE);
     
-    // Ordenar comentários por data (mais recentes primeiro)
     const sortedComments = [...comments].sort((a, b) => 
         new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
     );
     
-    // Pegar comentários da página atual
     const startIndex = (currentPage - 1) * COMMENTS_PER_PAGE;
     const currentComments = sortedComments.slice(startIndex, startIndex + COMMENTS_PER_PAGE);
 
     const formatDate = (timestamp: string) => {
         const date = new Date(timestamp);
-        // Data atual real do sistema
         const now = getCurrentDate();
         const diffInMs = now.getTime() - date.getTime();
         const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
@@ -244,11 +286,11 @@ export default function Comments() {
 
     const handleSubmitComment = async (e: React.FormEvent) => {
         e.preventDefault();
-        // if (!newComment.trim() || !currentUserPokemon || isSubmitting) return;
-        //Remover e substituir o if acima pelo de baixo pra voltar a utilizar pokemons
-        if (!newComment.trim() || authMode !== 'linkedin' || !linkedInUser || isSubmitting) return;
         
-        // Verificar limite de caracteres
+        if (!newComment.trim() || isSubmitting) return;
+        if (authMode === 'linkedin' && !linkedInUser) return;
+        if (authMode === 'anonymous' && !currentUserPokemon) return;
+        
         if (newComment.length > 1000) {
             showAlert(
                 'Limite Excedido',
@@ -261,26 +303,14 @@ export default function Comments() {
         
         const comment: Comment = {
             id: Date.now(),
-            author: linkedInUser.name,
-            authorImage: linkedInUser.profilePicture,
+            author: authMode === 'linkedin' && linkedInUser ? linkedInUser.name : (currentUserPokemon?.name || 'Anônimo'),
+            authorImage: authMode === 'linkedin' && linkedInUser ? linkedInUser.profilePicture : (currentUserPokemon ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currentUserPokemon.id}.png` : ''),
             content: newComment.trim(),
             timestamp: getCurrentDate().toISOString(),
-            linkedInId: linkedInUser.id,
-            isLinkedInUser: true,
-            profileUrl: linkedInUser.profileUrl
+            linkedInId: authMode === 'linkedin' && linkedInUser ? linkedInUser.id : undefined,
+            isLinkedInUser: authMode === 'linkedin' && !!linkedInUser,
+            profileUrl: authMode === 'linkedin' && linkedInUser ? linkedInUser.profileUrl : undefined
         };
-        // Descomentar e deletar o const acima q 
-        // cria o objeto pra salvar e identificar quando é anonimo ou nao
-        // const comment: Comment = {
-        //     id: Date.now(),
-        //     author: authMode === 'linkedin' && linkedInUser ? linkedInUser.name : (currentUserPokemon?.name || 'Anônimo'),
-        //     authorImage: authMode === 'linkedin' && linkedInUser ? linkedInUser.profilePicture : (currentUserPokemon ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currentUserPokemon.id}.png` : ''),
-        //     content: newComment.trim(),
-        //     timestamp: getCurrentDate().toISOString(),
-        //     linkedInId: authMode === 'linkedin' && linkedInUser ? linkedInUser.id : undefined,
-        //     isLinkedInUser: authMode === 'linkedin' && !!linkedInUser,
-        //     profileUrl: authMode === 'linkedin' && linkedInUser ? linkedInUser.profileUrl : undefined
-        // };
 
         try {
             // Salvar na API
@@ -298,8 +328,11 @@ export default function Comments() {
                 setComments(prev => [comment, ...prev]);
                 setNewComment('');
                 setCurrentPage(1);
-                // Gerar um novo Pokémon para o próximo comentário, Descomentar pra voltar a funciona
-                // generateNewPokemon();
+                
+                if (authMode === 'anonymous') {
+                    setCooldownSeconds(60);
+                    generateNewPokemon();
+                }
                 
                 if (responseData.moderation?.category === 'uncertain') {
                     showAlert(
@@ -310,7 +343,15 @@ export default function Comments() {
             } else {
                 console.error('Failed to save comment:', responseData);
                 
-                if (response.status === 400 && responseData.reason) {
+                if (response.status === 429) {
+                    const match = responseData.error.match(/(\d+) segundos/);
+                    const seconds = match ? parseInt(match[1]) : 60;
+                    setCooldownSeconds(seconds);
+                    showAlert(
+                        'Aguarde um Momento',
+                        responseData.error
+                    );
+                } else if (response.status === 400 && responseData.reason) {
                     showAlert(
                         'Comentário Rejeitado',
                         responseData.reason || 'Seu comentário contém conteúdo inadequado e não pode ser publicado.'
@@ -391,15 +432,14 @@ export default function Comments() {
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                                 </svg>
-                                Entrar para Comentar
+                                Entrar com LinkedIn
                             </button>
-                            {/* <button 
-                                className="authButton anonymous active"
-                                onClick={handleAnonymousMode}
-                                title="Modo anônimo com Pokémon"
-                            >
-                                Anônimo/Pokemons
-                            </button> */}
+                            <span className="anonymousModeIndicator">
+                                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.933 13.909A4.357 4.357 0 0 1 3 12c0-1 4-6 9-6m7.6 3.8A5.068 5.068 0 0 1 21 12c0 1-3 6-9 6-.314 0-.62-.014-.918-.04M5 19 19 5m-4 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                </svg>
+                                Modo Anônimo Ativo
+                            </span>
                         </>
                     ) : (
                         <div className="userInfo">
@@ -469,27 +509,26 @@ export default function Comments() {
                             </div>
                         </div>
                     </div>
-                    {/* Remova este bloco de validacao pra voltar usar modo anonimo */}
-                    {authMode === 'linkedin' && linkedInUser ? (
+                    {(authMode === 'linkedin' && linkedInUser) || (authMode === 'anonymous' && currentUserPokemon) ? (
                         <form className="commentthreadForm" onSubmit={handleSubmitComment}>
                             <div className="commentthreadEntry">
                                 <div className="commentthreadUserAvatar">
-                            {/* {authMode === 'linkedin' && linkedInUser ? ( */}
-                                    <img 
-                                        src={linkedInUser.profilePicture} 
-                                        alt={linkedInUser.name} 
-                                        title={linkedInUser.name}
-                                        style={{ borderRadius: '50%' }}
-                                    />
-                            {/* ) : currentUserPokemon ? (
-                                    <img 
-                                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currentUserPokemon.id}.png`} 
-                                        alt={currentUserPokemon.name} 
-                                        title={`${currentUserPokemon.name} - Clique para trocar`}
-                                        onClick={generateNewPokemon}
-                                        style={{ cursor: 'pointer' }}
-                                    />
-                                ) : null} */}
+                                    {authMode === 'linkedin' && linkedInUser ? (
+                                        <img 
+                                            src={linkedInUser.profilePicture} 
+                                            alt={linkedInUser.name} 
+                                            title={linkedInUser.name}
+                                            style={{ borderRadius: '50%' }}
+                                        />
+                                    ) : currentUserPokemon ? (
+                                        <img 
+                                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currentUserPokemon.id}.png`} 
+                                            alt={currentUserPokemon.name} 
+                                            title={`${currentUserPokemon.name} - Clique para trocar`}
+                                            onClick={generateNewPokemon}
+                                            style={{ cursor: 'pointer' }}
+                                        />
+                                    ) : null}
                                 </div>
                                 <div className="commentInputContainer">
                                     <div className="commentthreadEntryQuotebox">
@@ -518,9 +557,13 @@ export default function Comments() {
                                             <button 
                                                 type="submit" 
                                                 className="commentSubmitBtn"
-                                                disabled={!newComment.trim() || isSubmitting}
+                                                disabled={!newComment.trim() || isSubmitting || cooldownSeconds > 0}
                                             >
-                                                {isSubmitting ? 'Postando...' : 'Postar Comentário'}
+                                                {cooldownSeconds > 0 
+                                                    ? `Aguarde ${cooldownSeconds}s` 
+                                                    : isSubmitting 
+                                                    ? 'Postando...' 
+                                                    : 'Postar Comentário'}
                                             </button>
                                         </div>
                                     )}
@@ -532,10 +575,10 @@ export default function Comments() {
                             <div className="loginPromptIcon">💬</div>
                             <div className="loginPromptText">
                                 <h3>Faça login para comentar</h3>
+                                <p>Ou comente anonimamente como Pokémon 🎮</p>
                             </div>
                         </div>
                     )}
-                    {/* Remova este bloco de validacao pra voltar usar modo anonimo */}
 
 
                     <div className="commentthreadCommentContainer">
@@ -578,6 +621,18 @@ export default function Comments() {
                                             {comment.content}
                                         </div>
                                     </div>
+                                    {linkedInUser && linkedInUser.id === 'l-Aqc5-pZh' && (
+                                        <button
+                                            className="deleteCommentBtn"
+                                            onClick={() => handleDeleteComment(comment.id)}
+                                            title="Deletar comentário"
+                                        >
+                                            <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                                            </svg>
+
+                                        </button>
+                                    )}
                                 </div>
                             ))}
                         </div>

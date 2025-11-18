@@ -34,3 +34,4 @@ src/app/components/GitHubStatsAnalyzer.tsx
 src/app/analyzer
 src/app/components/RecentActivity.tsx
 src/app/config/openai.ts
+src/app/config/comments.json

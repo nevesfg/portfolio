@@ -55,7 +55,18 @@ export async function POST(req: Request) {
       profileUrl: profileUrl
     };
 
-    return NextResponse.json(userData);
+    const response = NextResponse.json(userData);
+    
+    const sessionValue = `${userinfo.sub}:${Date.now()}`;
+    response.cookies.set('linkedin_session', sessionValue, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 24 * 60 * 60,
+      path: '/'
+    });
+
+    return response;
   } catch (error) {
     console.error("LinkedIn API error:", error);
     return NextResponse.json({ error: "Failed to authenticate with LinkedIn" }, { status: 500 });
