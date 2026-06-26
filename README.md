@@ -28,6 +28,21 @@ cd portfolio
 npm install
 cp .env.example .env.local
 npm run dev
+
+
+# 1. Ir para a pasta do projeto
+cd ~/apps/docker/portfolio
+
+# 2. Ver as permissões atuais
+ls -la src/app/config/comments.json
+
+# 3. Dar permissão de leitura e escrita para todos
+chmod 666 src/app/config/comments.json
+
+# 4. Reiniciar o container
+docker compose restart portfolio
+
+# 5. Testar um comentário
 ```
 
 ## 🔑 Variáveis de Ambiente
