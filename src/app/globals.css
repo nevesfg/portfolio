@@ -3080,29 +3080,120 @@ Modal Overlay */
 
 /* Scroll Modal Effect */
 .scroll-section {
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
     position: relative;
+}
+
+/* Contact Open Button */
+.contactOpenBtn {
+    background: linear-gradient(135deg, #67c1f5 0%, #4a9eff 100%);
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(103, 193, 245, 0.3);
+    margin-top: 4px;
+}
+
+.contactOpenBtn:hover {
+    background: linear-gradient(135deg, #4a9eff 0%, #67c1f5 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(103, 193, 245, 0.4);
+}
+
+/* Contact Modal */
+@keyframes modalOverlayIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes modalOverlayOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes modalBoxIn {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes modalBoxOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(16px) scale(0.96);
+    }
+}
+
+.contactModalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: modalOverlayIn 0.25s ease;
+}
+
+.contactModalOverlay.closing {
+    animation: modalOverlayOut 0.2s ease forwards;
+}
+
+.contactModalBox {
+    background: #1b2838;
+    border: 1px solid rgba(103, 193, 245, 0.3);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    position: relative;
+    overflow: hidden;
+    animation: modalBoxIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.contactModalBox.closing {
+    animation: modalBoxOut 0.2s ease forwards;
+}
+
+.contactModalClose {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    color: #b8bcbf;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
     z-index: 1;
 }
 
-.scroll-section.modal-active {
-    transform: scale(1.15);
-    z-index: 50;
-    box-shadow: 
-        0 20px 40px -8px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(103, 193, 245, 0.3),
-        0 0 30px rgba(103, 193, 245, 0.15);
-    border-radius: 12px;
-    background: linear-gradient(135deg, 
-        rgba(103, 193, 245, 0.08) 0%, 
-        rgba(103, 193, 245, 0.03) 50%,
-        rgba(0, 0, 0, 0.1) 100%);
-}
-
-.scroll-section.modal-active .profileCustomization {
-    border-radius: 12px;
-    overflow: hidden;
+.contactModalClose:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
 }
 
 /* Smooth scroll behavior */
@@ -3141,45 +3232,6 @@ html {
     border-radius: 1px;
 }
 
-/* Responsive adjustments for modal effect */
-@media (max-width: 1200px) {
-    .scroll-section.modal-active {
-        transform: scale(1.08);
-        box-shadow: 
-            0 15px 30px -8px rgba(0, 0, 0, 0.6),
-            0 0 0 1px rgba(103, 193, 245, 0.2),
-            0 0 30px rgba(103, 193, 245, 0.1);
-    }
-}
-
-@media (max-width: 920px) {
-    .scroll-section.modal-active {
-        transform: scale(1.03);
-        box-shadow: 
-            0 15px 30px -8px rgba(0, 0, 0, 0.6),
-            0 0 0 1px rgba(103, 193, 245, 0.2),
-            0 0 30px rgba(103, 193, 245, 0.1);
-    }
-}
-
-@media (max-width: 768px) {
-    .scroll-section.modal-active {
-        transform: scale(1);
-        box-shadow: 
-            0 15px 30px -8px rgba(0, 0, 0, 0.6),
-            0 0 0 1px rgba(103, 193, 245, 0.2),
-            0 0 30px rgba(103, 193, 245, 0.1);
-    }
-}
-
-@media (max-width: 480px) {
-    .scroll-section.modal-active {
-        transform: scale(1);
-        box-shadow: 
-            0 10px 20px -5px rgba(0, 0, 0, 0.4),
-            0 0 0 1px rgba(103, 193, 245, 0.15);
-    }
-}
 /* Scroll to Top Button */
 .scroll-to-top {
     position: fixed;

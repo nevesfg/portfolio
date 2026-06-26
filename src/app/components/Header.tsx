@@ -141,9 +141,9 @@ export default function Header() {
                         >
                             Habilidades
                         </button>
-                        <button 
-                            className={`menuitem ${activeSection === 'projetos' ? 'active' : ''}`} 
-                            onClick={() => handleMenuItemClick('projetos')}
+                        <button
+                            className={`menuitem ${activeSection === 'projetos' ? 'active' : ''}`}
+                            onClick={() => window.location.href = '/projects'}
                         >
                             Projetos
                         </button>

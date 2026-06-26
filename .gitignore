@@ -35,3 +35,5 @@ src/app/analyzer
 src/app/components/RecentActivity.tsx
 src/app/config/openai.ts
 arquivos-pessoais
+next.config.js
+next.config.ts

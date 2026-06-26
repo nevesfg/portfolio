@@ -15,93 +15,93 @@
       }
     },
     {
-      "id": 1763435129893,
-      "author": "Victor Neves",
-      "authorImage": "https://media.licdn.com/dms/image/v2/D4D03AQG9QprkWiQCQw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1695522039328?e=1764806400&v=beta&t=agNWP6ahluGYaHHejCWxEnpRyGXE7sfz6I-4BigdxyE",
-      "content": "Eu sabo muito",
-      "timestamp": "2025-11-18T03:05:29.893Z",
-      "linkedInId": "l-Aqc5-pZh",
-      "isLinkedInUser": true,
-      "profileUrl": "https://www.linkedin.com/search/results/people/?keywords=Victor%20Neves",
-      "needsReview": false,
-      "moderationResult": {
-        "category": "uncertain",
-        "confidence": 0.7,
-        "reason": "IA marcou como ambíguo, precisa revisão manual",
-        "aiResponse": "3",
-        "cost": 0.00002565,
-        "tokens": {
-          "input": 167,
-          "output": 1,
-          "total": 168
+        "id": 1763435129893,
+        "author": "Victor Neves",
+        "authorImage": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/104.png",
+        "content": "Eu sabo muito",
+        "timestamp": "2025-11-18T03:05:29.893Z",
+        "linkedInId": "l-Aqc5-pZh",
+        "isLinkedInUser": true,
+        "profileUrl": "https://www.linkedin.com/search/results/people/?keywords=Victor%20Neves",
+        "needsReview": false,
+        "moderationResult": {
+            "category": "uncertain",
+            "confidence": 0.7,
+            "reason": "IA marcou como ambíguo, precisa revisão manual",
+            "aiResponse": "3",
+            "cost": 0.00002565,
+            "tokens": {
+                "input": 167,
+                "output": 1,
+                "total": 168
+            }
         }
-      }
     },
     {
-      "id": 1763424013192,
-      "author": "Italo Jeferson",
-      "authorImage": "https://media.licdn.com/dms/image/v2/D4D03AQGY-10UtFIu5Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1685539641886?e=1764806400&v=beta&t=woBeRAXLDx34ylbhuW_ohTa8dm4hNRL9wDJ6kXzY7eE",
-      "content": "Esse portfolio ficou babado",
-      "timestamp": "2025-11-18T00:00:13.192Z",
-      "linkedInId": "XA_0n8DSxb",
-      "isLinkedInUser": true,
-      "profileUrl": "https://www.linkedin.com/search/results/people/?keywords=Italo%20Jeferson",
-      "moderationResult": {
-        "category": "allowed",
-        "confidence": 0.9,
-        "reason": "IA identificou como comentário apropriado",
-        "aiResponse": "1",
-        "cost": 0.0000258,
-        "tokens": {
-          "input": 168,
-          "output": 1,
-          "total": 169
+        "id": 1763424013192,
+        "author": "Italo Jeferson",
+        "authorImage": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/43.png",
+        "content": "Esse portfolio ficou babado",
+        "timestamp": "2025-11-18T00:00:13.192Z",
+        "linkedInId": "XA_0n8DSxb",
+        "isLinkedInUser": true,
+        "profileUrl": "https://www.linkedin.com/search/results/people/?keywords=Italo%20Jeferson",
+        "moderationResult": {
+            "category": "allowed",
+            "confidence": 0.9,
+            "reason": "IA identificou como comentário apropriado",
+            "aiResponse": "1",
+            "cost": 0.0000258,
+            "tokens": {
+                "input": 168,
+                "output": 1,
+                "total": 169
+            }
         }
-      }
     },
     {
-      "id": 1763423255200,
-      "author": "Ana Júlia Almeida",
-      "authorImage": "https://media.licdn.com/dms/image/v2/D4D03AQEH-ydhz1yLqg/profile-displayphoto-shrink_100_100/B4DZR1H2xFHYAU-/0/1737131781668?e=1764806400&v=beta&t=djctFcXTDaBrTFn5IMM5RhSE4FSCy26KRKjyVdX6KdE",
-      "content": "Arrasa muito",
-      "timestamp": "2025-11-17T23:47:35.200Z",
-      "linkedInId": "4705ZpCYtm",
-      "isLinkedInUser": true,
-      "profileUrl": "https://www.linkedin.com/search/results/people/?keywords=Ana%20J%C3%BAlia%20Almeida",
-      "moderationResult": {
-        "category": "allowed",
-        "confidence": 0.9,
-        "reason": "IA identificou como comentário apropriado",
-        "aiResponse": "1",
-        "cost": 0.0000255,
-        "tokens": {
-          "input": 166,
-          "output": 1,
-          "total": 167
+        "id": 1763423255200,
+        "author": "Ana Júlia Almeida",
+        "authorImage": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+        "content": "Arrasa muito",
+        "timestamp": "2025-11-17T23:47:35.200Z",
+        "linkedInId": "4705ZpCYtm",
+        "isLinkedInUser": true,
+        "profileUrl": "https://www.linkedin.com/search/results/people/?keywords=Ana%20J%C3%BAlia%20Almeida",
+        "moderationResult": {
+            "category": "allowed",
+            "confidence": 0.9,
+            "reason": "IA identificou como comentário apropriado",
+            "aiResponse": "1",
+            "cost": 0.0000255,
+            "tokens": {
+                "input": 166,
+                "output": 1,
+                "total": 167
+            }
         }
-      }
     },
     {
-      "id": 1763423240150,
-      "author": "Ana Júlia Almeida",
-      "authorImage": "https://media.licdn.com/dms/image/v2/D4D03AQEH-ydhz1yLqg/profile-displayphoto-shrink_100_100/B4DZR1H2xFHYAU-/0/1737131781668?e=1764806400&v=beta&t=djctFcXTDaBrTFn5IMM5RhSE4FSCy26KRKjyVdX6KdE",
-      "content": "Achei muito divo, e o design ficou super legal.",
-      "timestamp": "2025-11-17T23:47:20.150Z",
-      "linkedInId": "4705ZpCYtm",
-      "isLinkedInUser": true,
-      "profileUrl": "https://www.linkedin.com/search/results/people/?keywords=Ana%20J%C3%BAlia%20Almeida",
-      "moderationResult": {
-        "category": "allowed",
-        "confidence": 0.9,
-        "reason": "IA identificou como comentário apropriado",
-        "aiResponse": "1",
-        "cost": 0.00002685,
-        "tokens": {
-          "input": 175,
-          "output": 1,
-          "total": 176
+        "id": 1763423240150,
+        "author": "Ana Júlia Almeida",
+        "authorImage": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+        "content": "Achei muito divo, e o design ficou super legal.",
+        "timestamp": "2025-11-17T23:47:20.150Z",
+        "linkedInId": "4705ZpCYtm",
+        "isLinkedInUser": true,
+        "profileUrl": "https://www.linkedin.com/search/results/people/?keywords=Ana%20J%C3%BAlia%20Almeida",
+        "moderationResult": {
+            "category": "allowed",
+            "confidence": 0.9,
+            "reason": "IA identificou como comentário apropriado",
+            "aiResponse": "1",
+            "cost": 0.00002685,
+            "tokens": {
+                "input": 175,
+                "output": 1,
+                "total": 176
+            }
         }
-      }
     }
   ]
 }
